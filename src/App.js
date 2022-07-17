@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       monsters: [],
     };
+    console.log("constructor");
   }
 
   componentDidMount() {
@@ -24,6 +25,7 @@ class App extends Component {
     // const users = await usersPromise.json();
     // this.setState({ monsters: users });
 
+    console.log("componentDidMount");
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((users) =>
@@ -37,6 +39,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("render");
     return (
       <div className="App">
         {this.state.monsters.map((monster) => (
