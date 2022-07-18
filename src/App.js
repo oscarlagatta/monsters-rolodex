@@ -1,7 +1,7 @@
 import { Component } from "react";
-
 import "./App.css";
-import logo from "./logo.svg";
+import CardList from "./components/card-list/card-list.component";
+import SearchBox from "./components/search-box/search-box.component";
 
 class App extends Component {
   constructor() {
@@ -11,22 +11,11 @@ class App extends Component {
       monsters: [],
       searchField: "",
     };
-    console.log("constructor");
+    // console.log("constructor");
   }
 
   componentDidMount() {
-    // My implementation
-    // const usersPromise = await fetch(
-    //   "https://jsonplaceholder.typicode.com/users",
-    //   {
-    //     method: "GET",
-    //     headers: {},
-    //   }
-    // );
-    // const users = await usersPromise.json();
-    // this.setState({ monsters: users });
-
-    console.log("componentDidMount");
+    // console.log("componentDidMount");
 
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
@@ -34,8 +23,8 @@ class App extends Component {
         this.setState(
           () => {
             return { monsters: users };
-          },
-          () => console.log(this.state)
+          }
+          // () => console.log(this.state)
         )
       );
   }
@@ -48,7 +37,7 @@ class App extends Component {
   };
 
   render() {
-    console.log("render");
+    console.log("render from app.js");
 
     const { monsters, searchField } = this.state;
     const { onSearchChange } = this;
@@ -59,17 +48,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input
+        <SearchBox
+          onChangeHandler={onSearchChange}
+          placeholder="Search Monsters"
           className="search-box"
-          type="search"
-          placeholder="Search monsters"
-          onChange={onSearchChange}
         />
-        {filteredMonsters.map((monster) => (
-          <div key={monster.id}>
-            <h1>{monster.name}</h1>
-          </div>
-        ))}
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
