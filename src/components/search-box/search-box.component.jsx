@@ -7,7 +7,7 @@ class SearchBox extends Component {
       <input
         className={`search-box ${className}`}
         type="search"
-        placeholder="Search monsters"
+        placeholder={placeholder}
         onChange={onChangeHandler}
       />
     );
